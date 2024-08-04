@@ -10,13 +10,13 @@
   <script type="text/babel">
     const PropTypes = {
       string(props, propName, componentName) {
-        if (typeof props[propName] !== 'string') {
+        const type = typeof props[propName]
+        if (type !== 'string') {
           return new Error(
-            `Hey, the component ${componentName} needs the prop ${propName} to be a string, but a ${typeof props[
-              propName
-            ]} was passed`,
+            `Hey, the comp ${componentName} need the prop ${propName} to be a "string" but was passed a ${type}`,
           )
         }
+        console.log({props, propName, componentName})
       },
     }
 
@@ -27,7 +27,7 @@
         </div>
       )
     }
-
+    // add propType property into the Message comp
     Message.propTypes = {
       subject: PropTypes.string,
       greeting: PropTypes.string,
@@ -35,8 +35,7 @@
 
     const element = (
       <div className="container">
-        <Message subject="World" greeting="Hello" />
-        <Message subject="World" greeting="Goodbye" />
+        <Message subject="World" greeting={9} />
         <Message subject={99} greeting="Goodbye" />
       </div>
     )
