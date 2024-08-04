@@ -1,6 +1,6 @@
 <!-- Creating custom components -->
-<!-- 💯 using a custom component with JSX -->
-<!-- http://localhost:3000/isolated/final/04.extra-2.html -->
+<!-- 💯 Runtime validation with PropTypes -->
+<!-- http://localhost:3000/isolated/final/04.extra-3.html -->
 
 <body>
   <div id="root"></div>
@@ -8,15 +8,36 @@
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
   <script type="text/babel">
-    // This is being used as a component 🎉
-    function Message({children}) {
-      return <div className="message">{children}</div>
+    const PropTypes = {
+      string(props, propName, componentName) {
+        if (typeof props[propName] !== 'string') {
+          return new Error(
+            `Hey, the component ${componentName} needs the prop ${propName} to be a string, but a ${typeof props[
+              propName
+            ]} was passed`,
+          )
+        }
+      },
+    }
+
+    function Message({subject, greeting}) {
+      return (
+        <div className="message">
+          {greeting}, {subject}
+        </div>
+      )
+    }
+
+    Message.propTypes = {
+      subject: PropTypes.string,
+      greeting: PropTypes.string,
     }
 
     const element = (
       <div className="container">
-        <Message>Hello World</Message>
-        <Message>Goodbye World</Message>
+        <Message subject="World" greeting="Hello" />
+        <Message subject="World" greeting="Goodbye" />
+        <Message subject={99} greeting="Goodbye" />
       </div>
     )
 
