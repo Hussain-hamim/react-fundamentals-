@@ -7,9 +7,10 @@ function UsernameForm({onSubmitUsername}) {
   function handleSubmit(event) {
     event.preventDefault()
 
-    const value = event.target[0].value
+    // const value = event.target[0].value
+    const value = event.target.elements.userNameInput.value
 
-    console.dir(value)
+    // console.dir(event.target.elements.userNameInput.value)
 
     onSubmitUsername(value)
   }
