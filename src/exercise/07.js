@@ -15,8 +15,15 @@ function App() {
 
   function addItem() {
     const itemIds = items.map(i => i.id)
+
     setItems([...items, allItems.find(i => !itemIds.includes(i.id))])
   }
+
+  // const itemIds = items.map(i => i.id)
+  const itemIds = items.map(i => i.id)
+  const del = allItems.find(i => !itemIds.includes(i.id))
+
+  console.log(del)
 
   function removeItem(item) {
     setItems(items.filter(i => i.id !== item.id))
@@ -30,7 +37,7 @@ function App() {
       <ul>
         {items.map(item => (
           // 🐨 add a key prop to the <li> below. Set it to item.id
-          <li>
+          <li key={item.id}>
             <button onClick={() => removeItem(item)}>remove</button>{' '}
             <label htmlFor={`${item.id}-input`}>{item.value}</label>{' '}
             <input id={`${item.id}-input`} defaultValue={item.value} />
