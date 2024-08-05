@@ -16,7 +16,7 @@
             `Hey, the comp ${componentName} need the prop ${propName} to be a "string" but was passed a ${type}`,
           )
         }
-        console.log({props, propName, componentName})
+        // console.log({props, propName, componentName})
       },
     }
 
@@ -27,16 +27,36 @@
         </div>
       )
     }
+
+    function Counter({number}) {
+      return <div> the number is: {number}</div>
+    }
+
+    Counter.propTypes = {
+      number(props, propName, componentName) {
+        const type = typeof props[propName]
+        if (type !== 'number') {
+          return new Error(
+            `Hey, the comp ${componentName} need the prop ${propName} to be a "number" but was passed a ${type}`,
+          )
+        }
+        // console.log({props, propName, componentName})
+      },
+    }
+
     // add propType property into the Message comp
     Message.propTypes = {
       subject: PropTypes.string,
       greeting: PropTypes.string,
     }
 
+    // console.log(<Counter number={99} />)
+
     const element = (
       <div className="container">
-        <Message subject="World" greeting={9} />
-        <Message subject={99} greeting="Goodbye" />
+        <Message subject="Hello" greeting="World" />
+        <Message subject="Goodbye" greeting="World" />
+        <Counter number={'99'} />
       </div>
     )
 
