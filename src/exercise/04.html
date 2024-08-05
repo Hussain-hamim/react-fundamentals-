@@ -7,19 +7,9 @@
   <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
-  <script type="text/babel">
-    const PropTypes = {
-      string(props, propName, componentName) {
-        const type = typeof props[propName]
-        if (type !== 'string') {
-          return new Error(
-            `Hey, the comp ${componentName} need the prop ${propName} to be a "string" but was passed a ${type}`,
-          )
-        }
-        // console.log({props, propName, componentName})
-      },
-    }
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 
+  <script type="text/babel">
     function Message({subject, greeting}) {
       return (
         <div className="message">
@@ -28,35 +18,17 @@
       )
     }
 
-    function Counter({number}) {
-      return <div> the number is: {number}</div>
-    }
-
-    Counter.propTypes = {
-      number(props, propName, componentName) {
-        const type = typeof props[propName]
-        if (type !== 'number') {
-          return new Error(
-            `Hey, the comp ${componentName} need the prop ${propName} to be a "number" but was passed a ${type}`,
-          )
-        }
-        // console.log({props, propName, componentName})
-      },
-    }
-
-    // add propType property into the Message comp
     Message.propTypes = {
-      subject: PropTypes.string,
-      greeting: PropTypes.string,
+      subject: PropTypes.string.isRequired,
+      greeting: PropTypes.string.isRequired,
     }
 
     // console.log(<Counter number={99} />)
 
     const element = (
       <div className="container">
-        <Message subject="Hello" greeting="World" />
-        <Message subject="Goodbye" greeting="World" />
-        <Counter number={'99'} />
+        <Message subject="Hello" />
+        <Message subject="Goodbye" greeting={99} />
       </div>
     )
 
