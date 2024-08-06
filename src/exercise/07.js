@@ -21,10 +21,21 @@ function FocusDemo() {
     }
   }, [autoShuffle])
 
+  // a higher-order function that return an event handler,
+  // this pattern allow us used to create a specific event for each item, binding the item to the handler
+
   function getChangeHandler(item) {
+    // event handler fn
     return event => {
       const newValue = event.target.value
+      // state update callback: called with callback fn instead of
+      // directly new state value.
+      // this is crucial for ensuring that state update is based on
+      // the most recent state. state update are asynchronous
+      // so using callback fn ensures that the allItems passed to the callback
+      // is the latest state
       setItems(allItems =>
+        // this map is used to create a new array by transforming its items
         allItems.map(i => ({
           ...i,
           value: i.id === item.id ? newValue : i.value,
