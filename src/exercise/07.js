@@ -126,7 +126,7 @@ function shuffle(originalArray) {
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
     // this loop is run until currentIndex is 0
-    // so it run three time
+    // so it run four time
 
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex)
