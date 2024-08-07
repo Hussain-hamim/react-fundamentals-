@@ -14,12 +14,12 @@ function FocusDemo() {
 
   const [autoShuffle, setAutoShuffle] = React.useState(true)
 
-  React.useEffect(() => {
-    if (autoShuffle) {
-      const id = setInterval(() => setItems(shuffle), 1000)
-      return () => clearInterval(id)
-    }
-  }, [autoShuffle])
+  // React.useEffect(() => {
+  //   if (autoShuffle) {
+  //     const id = setInterval(() => setItems(shuffle), 1000)
+  //     return () => clearInterval(id)
+  //   }
+  // }, [autoShuffle])
 
   // a higher-order function that return an event handler,
   // this pattern allow us used to create a specific event for each item, binding the item to the handler
@@ -120,12 +120,17 @@ function FocusDemo() {
 function shuffle(originalArray) {
   const array = [...originalArray]
   let currentIndex = array.length
+
   let temporaryValue
   let randomIndex
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
+    // this loop is run until currentIndex is 0
+    // so it run three time
+
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex)
+    console.log(randomIndex)
     currentIndex -= 1
     // And swap it with the current element.
     temporaryValue = array[currentIndex]
@@ -134,6 +139,8 @@ function shuffle(originalArray) {
   }
   return array
 }
+
+shuffle(['one', 'two', 'three', 'four'])
 
 function App() {
   return <FocusDemo />
