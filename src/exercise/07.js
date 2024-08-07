@@ -14,12 +14,12 @@ function FocusDemo() {
 
   const [autoShuffle, setAutoShuffle] = React.useState(true)
 
-  // React.useEffect(() => {
-  //   if (autoShuffle) {
-  //     const id = setInterval(() => setItems(shuffle), 1000)
-  //     return () => clearInterval(id)
-  //   }
-  // }, [autoShuffle])
+  React.useEffect(() => {
+    if (autoShuffle) {
+      const id = setInterval(() => setItems(shuffle), 1000)
+      return () => clearInterval(id)
+    }
+  }, [autoShuffle])
 
   // a higher-order function that return an event handler,
   // this pattern allow us used to create a specific event for each item, binding the item to the handler
