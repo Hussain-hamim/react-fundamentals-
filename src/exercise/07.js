@@ -130,10 +130,11 @@ function shuffle(originalArray) {
 
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex)
-    console.log(randomIndex)
     currentIndex -= 1
     // And swap it with the current element.
     temporaryValue = array[currentIndex]
+
+    // i do not get this two line
     array[currentIndex] = array[randomIndex]
     array[randomIndex] = temporaryValue
   }
